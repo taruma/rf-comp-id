@@ -1,0 +1,26 @@
+figcaption {
+    margin: auto;
+    text-align: center;
+    margin-top: 2px;
+}
+
+img.logo {
+  -webkit-filter: drop-shadow(5px 5px 5px #666666);
+  filter: drop-shadow(5px 5px 5px #666666);
+}
+
+/* .maplibregl-canvas {
+    border-radius: 1%;
+    border: 1px solid;
+    box-shadow: 1px 2px 4px #888888;
+} */
+
+.quarto-figure>figure {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: fit-content !important;
+    border-radius: 1%;
+    border: 1px solid;
+    box-shadow: 1px 2px 4px #888888;
+}
