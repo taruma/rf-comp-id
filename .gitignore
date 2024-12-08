@@ -162,3 +162,4 @@ uv.lock
 playground.ipynb
 
 data
+.jupyter_cache/
