@@ -11,10 +11,10 @@ figcaption {
 } */
 
 div[id^="fig-"].quarto-figure {
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: fit-content !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
     border-radius: 1%;
     border: 1px solid;
     box-shadow: 1px 2px 4px #888888;
