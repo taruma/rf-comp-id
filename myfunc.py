@@ -1,22 +1,53 @@
-from pyproj import Transformer
+import pandas as pd
+import numpy as np
 
-def convert_utm_to_latlong(x, y):
-    transformer = Transformer.from_crs("EPSG:32748", "EPSG:4326", always_xy=True)
-    longs, lats = transformer.transform(x, y)
-    return lats, longs
+def generate_geojson_and_dataframe(precipitation_data, date, offset=0.025):
+    features = []
+    lats = []
+    longs = []
+    precips = []
+    locs = []
+    
+    precipitation_selected = precipitation_data.sel(time=date)
 
-def extract_coordinates(geojson):
-    # Get coordinates from first feature (assuming single polygon)
-    coordinates = geojson['features'][0]['geometry']['coordinates'][0][0]
+    latitude_values = precipitation_selected.latitude.values
+    longitude_values = precipitation_selected.longitude.values
+
+    for lat in latitude_values:
+        for lon in longitude_values:
+            precip_value = precipitation_selected.sel(latitude=lat, longitude=lon).values
+            if not np.isnan(precip_value):
+
+                square_coords = [
+                    [lon - offset, lat - offset],
+                    [lon + offset, lat - offset],
+                    [lon + offset, lat + offset],
+                    [lon - offset, lat + offset],
+                    [lon - offset, lat - offset],
+                ]
+
+                feature = {
+                    "type": "Feature",
+                    "geometry": {"type": "Polygon", "coordinates": [square_coords]},
+                    "properties": {"id": f"{lat:.2f}, {lon:.2f}"},
+                }
+
+                features.append(feature)
+                lats.append(lat)
+                longs.append(lon)
+                precips.append(precip_value)
+                locs.append(f"{lat:.2f}, {lon:.2f}")
     
-    # Create lists for lat/long
-    longitudes = []
-    latitudes = []
+    geojson = {"type": "FeatureCollection", "features": features}
     
-    # Extract coordinates
-    for coord in coordinates:
-        # coord[0] is longitude, coord[1] is latitude (x,y format in UTM)
-        longitudes.append(coord[0])
-        latitudes.append(coord[1])
+    data = pd.DataFrame(
+        {
+            "Latitude": lats,
+            "Longitude": longs,
+            "Precipitation": precips,
+            "Location": locs,
+            "Date": date
+        }
+    )
     
-    return latitudes, longitudes
+    return geojson, data
