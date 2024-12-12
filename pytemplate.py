@@ -19,17 +19,19 @@ FONT_COLOR_RGB_ALPHA = f"rgba({_red},{_green},{_blue},0.2)"
 # GENERAL
 
 mytemplate.layout.hovermode = "x"
-mytemplate.layout.margin.t = 80
-mytemplate.layout.margin.b = 35
-mytemplate.layout.margin.l = 55  
-mytemplate.layout.margin.r = 55
+mytemplate.layout.margin.t = 0
+mytemplate.layout.margin.b = 0
+mytemplate.layout.margin.l = 0  
+mytemplate.layout.margin.r = 0
 mytemplate.layout.margin.pad = 0
 mytemplate.layout.paper_bgcolor = mytemplate.layout.plot_bgcolor
 
 # LEGEND
-LEGEND_FONT_SIZE = 15
-mytemplate.layout.showlegend = True
+LEGEND_FONT_SIZE = 12
+mytemplate.layout.showlegend = False
 mytemplate.layout.legend.font.size = LEGEND_FONT_SIZE
+mytemplate.layout.legend.font.family = _FONT_FAMILY
+mytemplate.layout.legend.bgcolor = 'rgba(255,255,255,0.6)'
 mytemplate.layout.legend.groupclick = "toggleitem"
 
 
@@ -99,7 +101,6 @@ mytemplate.layout.yaxis.title.standoff = _YAXIS_TITLE_STANDOFF
 mytemplate.layout.annotationdefaults.font.color = mytemplate.layout.font.color
 mytemplate.layout.annotationdefaults.font.size = 15
 
-
 # LAYOUT BAR
 mytemplate.layout.barmode = "stack"
 mytemplate.layout.bargap = 0
@@ -108,13 +109,8 @@ mytemplate.layout.bargap = 0
 # PLOT SPECIFIC
 # =============
 
-# HEATMAP
-mytemplate.data.heatmap[0].textfont.family = _FONT_FAMILY
-mytemplate.data.heatmap[0].colorscale = "BlackBody"
-mytemplate.data.heatmap[0].colorbar.outlinecolor = "black"
-mytemplate.data.heatmap[0].colorbar.outlinewidth = 2
-mytemplate.data.heatmap[0].colorbar.ticksuffix = "%"
-mytemplate.data.heatmap[0].colorbar.x = 1
-mytemplate.data.heatmap[0].colorbar.xpad = 10
-mytemplate.data.heatmap[0].colorbar.y = 0.5
-mytemplate.data.heatmap[0].colorbar.ypad = 20
+# MAP
+mytemplate.layout.map.style = "open-street-map"
+mytemplate.layout.map.zoom = 9
+mytemplate.layout.map.center.lon = 107.66088653834305
+mytemplate.layout.map.center.lat = -7.017416613305268
