@@ -15,7 +15,7 @@ def generate_geojson_and_dataframe(precipitation_data, date, offset=0.025):
 
     for lat in latitude_values:
         for lon in longitude_values:
-            precip_value = precipitation_selected.sel(latitude=lat, longitude=lon).values
+            precip_value = precipitation_selected.sel(latitude=lat, longitude=lon).values.item()
             if not np.isnan(precip_value):
 
                 square_coords = [
